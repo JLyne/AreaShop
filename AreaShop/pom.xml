@@ -4,7 +4,7 @@
     <artifactId>areashop</artifactId>
     <packaging>jar</packaging>
     <name>AreaShop</name>
-    <version>2.6.0</version> <!-- Main plugin version -->
+    <version>RTGame</version> <!-- Main plugin version -->
 
     <parent>
         <groupId>me.wiefferink</groupId>
@@ -18,9 +18,8 @@
             <groupId>org.bukkit</groupId>
             <artifactId>craftbukkit</artifactId>
             <version>1.13-R0.1-SNAPSHOT</version>
-            <type>jar</type>
-            <optional>true</optional>
-            <scope>provided</scope>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../dependencies/craftbukkit-1.13-R0.1-SNAPSHOT.jar</systemPath>
         </dependency>
 
         <!-- InteractiveMessenger library -->
@@ -158,13 +157,6 @@
             <version>any</version>
             <systemPath>${project.basedir}/../dependencies/VaultAPI-1.4.jar</systemPath>
         </dependency>
-
-        <!-- bStats -->
-        <dependency>
-            <groupId>org.bstats</groupId>
-            <artifactId>bstats-bukkit</artifactId>
-            <version>1.1</version>
-        </dependency>
     </dependencies>
 
     <profiles>
@@ -268,7 +260,6 @@
 
     <build>
         <directory>target</directory>
-        <finalName>AreaShop</finalName>
         <resources>
             <resource>
                 <targetPath>.</targetPath>
@@ -306,11 +297,6 @@
                                 <relocation>
                                     <pattern>me.wiefferink.bukkitdo</pattern>
                                     <shadedPattern>me.wiefferink.areashop.shaded.bukkitdo</shadedPattern>
-                                </relocation>
-                                <!-- Relocate bstats -->
-                                <relocation>
-                                    <pattern>org.bstats</pattern>
-                                    <shadedPattern>me.wiefferink.areashop.shaded.bstats</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>

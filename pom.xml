@@ -39,6 +39,10 @@
       <id>bstats-repo</id>
       <url>http://repo.bstats.org/content/repositories/releases/</url>
     </repository>
+     <repository>
+          <id>bukkit-repo</id>
+          <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
+      </repository>
   </repositories>
 
   <properties>
