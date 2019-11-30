@@ -366,14 +366,24 @@ public class BuyRegion extends GeneralRegion {
 			r = null;
 			OfflinePlayer oldOwnerPlayer = Bukkit.getOfflinePlayer(oldOwner);
 			String oldOwnerName = getPlayerName();
+
 			if(oldOwnerPlayer != null && oldOwnerPlayer.getName() != null) {
 				r = plugin.getEconomy().depositPlayer(oldOwnerPlayer, getWorldName(), getResellPrice());
 				oldOwnerName = oldOwnerPlayer.getName();
 			} else if(oldOwnerName != null) {
 				r = plugin.getEconomy().depositPlayer(oldOwnerName, getWorldName(), getResellPrice());
 			}
+
 			if(r == null || !r.transactionSuccess()) {
+				plugin.getEconomy().depositPlayer(offlinePlayer, getWorldName(), getResellPrice());
+
+				if(offlinePlayer.isOnline()) {
+					message(offlinePlayer, "buy-payLandlordError", oldOwnerName);
+				}
+
 				AreaShop.warn("Something went wrong with paying '" + oldOwnerName + "' " + getFormattedPrice() + " for his resell of region " + getName() + " to " + offlinePlayer.getName());
+
+				return false;
 			}
 			// Resell is done, disable that now
 			disableReselling();
@@ -422,7 +432,15 @@ public class BuyRegion extends GeneralRegion {
 					r = plugin.getEconomy().depositPlayer(landlordName, getWorldName(), getPrice());
 				}
 				if(r != null && !r.transactionSuccess()) {
+					plugin.getEconomy().depositPlayer(offlinePlayer, getWorldName(), getResellPrice());
+
+					if(offlinePlayer.isOnline()) {
+						message(offlinePlayer, "buy-payLandlordError", landlordName);
+					}
+
 					AreaShop.warn("Something went wrong with paying '" + landlordName + "' " + getFormattedPrice() + " for his sell of region " + getName() + " to " + offlinePlayer.getName());
+
+					return false;
 				}
 			}
 
@@ -518,7 +536,13 @@ public class BuyRegion extends GeneralRegion {
 					error = true;
 				}
 				if(error || response == null || !response.transactionSuccess()) {
+					if(player.isOnline()) {
+						message(player, "sell-payError");
+					}
+
 					AreaShop.warn("Something went wrong with paying back money to " + getPlayerName() + " while selling region " + getName());
+
+					return false;
 				}
 			}
 		}

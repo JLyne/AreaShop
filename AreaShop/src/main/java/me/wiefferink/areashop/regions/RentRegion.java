@@ -564,20 +564,32 @@ public class RentRegion extends GeneralRegion {
 			AreaShop.debug("Something went wrong with getting money from " + offlinePlayer.getName() + " while renting " + getName() + ": " + r.errorMessage);
 			return false;
 		}
-		// Optionally give money to the landlord
+
+		// Give money to the landlord
 		OfflinePlayer landlordPlayer = null;
 		if(getLandlord() != null) {
 			landlordPlayer = Bukkit.getOfflinePlayer(getLandlord());
 		}
+
 		String landlordName = getLandlordName();
+
 		if(landlordName != null) {
 			if(landlordPlayer != null && landlordPlayer.getName() != null) {
 				r = plugin.getEconomy().depositPlayer(landlordPlayer, getWorldName(), price);
 			} else {
 				r = plugin.getEconomy().depositPlayer(landlordName, getWorldName(), price);
 			}
+
 			if(r == null || !r.transactionSuccess()) {
+				plugin.getEconomy().depositPlayer(offlinePlayer, getWorldName(), price);
+
+				if(offlinePlayer.isOnline()) {
+					message(offlinePlayer, "rent-payLandlordError", landlordName);
+				}
+
 				AreaShop.warn("Something went wrong with paying '" + landlordName + "' " + Utils.formatCurrency(price) + " for his rent of region " + getName() + " to " + offlinePlayer.getName());
+
+				return false;
 			}
 		}
 
@@ -685,8 +697,14 @@ public class RentRegion extends GeneralRegion {
 				} catch(Exception e) {
 					error = true;
 				}
+
 				if(error || r == null || !r.transactionSuccess()) {
+					if(player.isOnline()) {
+						message(player, "rent-payError");
+					}
+
 					AreaShop.warn("Something went wrong with paying back to " + getPlayerName() + " money while unrenting region " + getName());
+					return false;
 				}
 			}
 		}
