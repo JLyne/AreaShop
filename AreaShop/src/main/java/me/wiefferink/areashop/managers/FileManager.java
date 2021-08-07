@@ -858,10 +858,31 @@ public class FileManager extends Manager {
 		if(groupsConfig == null) {
 			groupsConfig = new YamlConfiguration();
 		}
+
+
 		for(String groupName : groupsConfig.getKeys(false)) {
+			ConfigurationSection groupSettings = groupsConfig.getConfigurationSection(groupName);
+
+			if(getRegionSettings() != null) {
+				getRegionSettings().getValues(true).forEach((String key, Object value) -> {
+					if(!groupSettings.contains(key)) {
+						groupSettings.set(key, value);
+					}
+				});
+			} else {
+				getRegionSettings().getValues(true).forEach((String key, Object value) -> {
+					if(!groupSettings.contains(key)) {
+						groupSettings.set(key, value);
+					}
+				});
+			}
+
+			groupsConfig.set(groupName, groupSettings);
+
 			RegionGroup group = new RegionGroup(plugin, groupName);
 			groups.put(groupName, group);
 		}
+
 		return result;
 	}
 
