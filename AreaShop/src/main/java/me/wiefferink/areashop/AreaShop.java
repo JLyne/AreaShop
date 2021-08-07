@@ -34,7 +34,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -291,13 +290,7 @@ public final class AreaShop extends JavaPlugin implements AreaShopInterface {
 		}
 
 		// Load Bukkit implementation
-		String bukkitHandler;
-		try {
-			Class.forName("org.bukkit.block.data.type.WallSign");
-			bukkitHandler = "1_13";
-		} catch (ClassNotFoundException e) {
-			bukkitHandler = "1_12";
-		}
+		String bukkitHandler = "1_13";
 
 		try {
 			Class<?> clazz = Class.forName("me.wiefferink.areashop.handlers.BukkitHandler" + bukkitHandler);
