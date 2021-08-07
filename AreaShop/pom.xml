@@ -140,13 +140,6 @@
             <artifactId>areashop-worldedit-7_beta_4</artifactId>
             <version>latest</version>
         </dependency>
-        <dependency>
-            <groupId>me.wiefferink</groupId>
-            <artifactId>areashop-fastasyncworldedit</artifactId>
-            <version>latest</version>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency>
 
         <!-- Vault -->
         <dependency>

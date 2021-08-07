@@ -264,35 +264,6 @@ public final class AreaShop extends JavaPlugin implements AreaShopInterface {
 			wgVersion = "WorldGuardHandler" + wgVersion;
 		}
 
-		// Check if FastAsyncWorldEdit is installed
-		boolean fawe;
-		try {
-			Class.forName("com.boydti.fawe.Fawe" );
-			fawe = true;
-		} catch (ClassNotFoundException ignore) {
-			fawe = false;
-		}
-
-		if (fawe) {
-			boolean useNewIntegration = true;
-			List<String> standardIntegrationVersions = Arrays.asList("1.7", "1.8", "1.9", "1.10", "1.11", "1.12");
-			for(String standardIntegrationVersion : standardIntegrationVersions) {
-				String version = Bukkit.getBukkitVersion();
-				// Detects '1.8', '1.8.3', '1.8-pre1' style versions
-				if(version.equals(standardIntegrationVersion)
-						|| version.startsWith(standardIntegrationVersion + ".")
-						|| version.startsWith(standardIntegrationVersion + "-")) {
-					useNewIntegration = false;
-					break;
-				}
-			}
-
-			if (useNewIntegration) {
-				weVersion = "FastAsyncWorldEditHandler";
-				wgVersion = "FastAsyncWorldEditWorldGuardHandler";
-			}
-		}
-
 		// Load WorldEdit
 		try {
 			Class<?> clazz = Class.forName("me.wiefferink.areashop.handlers." + weVersion);
@@ -351,7 +322,7 @@ public final class AreaShop extends JavaPlugin implements AreaShopInterface {
 
 		// Print loaded version of WG and WE in debug
 		if(wgVersion != null) {
-			AreaShop.debug("Loaded ", wgVersion, "(raw version:" + rawWgVersion + ", major:" + major + ", minor:" + minor + ", fixes:" + fixes + ", build:" + build + ", fawe:" + fawe + ")");
+			AreaShop.debug("Loaded ", wgVersion, "(raw version:" + rawWgVersion + ", major:" + major + ", minor:" + minor + ", fixes:" + fixes + ", build:" + build + ")");
 		}
 		if(weVersion != null) {
 			AreaShop.debug("Loaded ", weVersion, "(raw version:" + rawWeVersion + ", beta:" + weBeta + ")");
