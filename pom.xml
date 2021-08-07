@@ -43,6 +43,10 @@
           <id>bukkit-repo</id>
           <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
       </repository>
+     <repository>
+          <id>paper-repo</id>
+          <url>https://papermc.io/repo/repository/maven-public/</url>
+      </repository>
   </repositories>
 
   <properties>
@@ -54,7 +58,6 @@
 
   <modules>
     <module>areashop-interface</module>
-    <module>areashop-bukkit-1_12</module>
     <module>areashop-bukkit-1_13</module>
     <module>areashop-worldguard-5</module>
     <module>areashop-worldguard-6</module>
