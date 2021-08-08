@@ -16,33 +16,11 @@
     </license>
   </licenses>
 
-  <issueManagement>
-    <url>https://github.com/NLthijs48/AreaShop/issues</url>
-    <system>GitHub Issues</system>
-  </issueManagement>
-
-  <ciManagement>
-    <system>Jenkins</system>
-    <url>http://jenkins.wiefferink.me/job/AreaShop</url>
-  </ciManagement>
-
   <repositories>
-    <repository>
-      <id>vault-repo</id>
-      <url>http://nexus.hc.to/content/repositories/pub_releases</url>
-    </repository>
     <repository>
       <id>wiefferink-repo</id>
       <url>http://maven.wiefferink.me</url>
     </repository>
-    <repository>
-      <id>bstats-repo</id>
-      <url>http://repo.bstats.org/content/repositories/releases/</url>
-    </repository>
-     <repository>
-          <id>bukkit-repo</id>
-          <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
-      </repository>
      <repository>
           <id>paper-repo</id>
           <url>https://papermc.io/repo/repository/maven-public/</url>
