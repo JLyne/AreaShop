@@ -13,7 +13,6 @@
     </parent>
 
     <dependencies>
-        <!-- Bukkit, AreaShop aims to support 1.7.9+ -->
         <dependency>
             <groupId>com.destroystokyo.paper</groupId>
             <artifactId>paper-api</artifactId>
