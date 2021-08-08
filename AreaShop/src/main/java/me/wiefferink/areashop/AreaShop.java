@@ -169,16 +169,7 @@ public final class AreaShop extends JavaPlugin implements AreaShopInterface {
 			}
 
 			// Get correct WorldEditInterface (handles things that changed version to version)
-			if(worldEdit.getDescription().getVersion().startsWith("5.")) {
-				weVersion = "5";
-			} else if(worldEdit.getDescription().getVersion().startsWith("6.")) {
-				weVersion = "6";
-			} else if ("beta-01".equalsIgnoreCase(weBeta)) {
-				weVersion = "7_beta_1";
-			} else {
-				// beta-02 and beta-03 also have the new vector system already
-				weVersion = "7_beta_4";
-			}
+			weVersion = "7_beta_4";
 
 			weVersion = "WorldEditHandler" + weVersion;
 		}
@@ -235,26 +226,7 @@ public final class AreaShop extends JavaPlugin implements AreaShopInterface {
 				}
 
 				// Determine correct implementation to use
-				if(rawWgVersion.startsWith("5.")) {
-					wgVersion = "5";
-				} else if(major == 6 && minor == 1 && fixes < 3) {
-					wgVersion = "6";
-				} else if(major == 6) {
-					if(build != null && build == 1672) {
-						error = true;
-						error("Build 1672 of WorldGuard is broken, update to a later build or a stable version!");
-					} else if(build != null && build < 1672) {
-						wgVersion = "6";
-					} else {
-						wgVersion = "6_1_3";
-					}
-				} else if ("beta-01".equalsIgnoreCase(weBeta)) {
-					// When using WorldEdit beta-01, we need to use the WorldGuard variant with the old vector system
-					wgVersion = "7_beta_1";
-				} else {
-					// Even though the WorldGuard file is called beta-02, the reported version is still beta-01!
-					wgVersion = "7_beta_2";
-				}
+				wgVersion = "7_beta_2";
 			} catch(Exception e) { // If version detection fails, at least try to load the latest version
 				warn("Parsing the WorldGuard version failed, assuming version 7_beta_2:", rawWgVersion);
 				wgVersion = "7_beta_2";
