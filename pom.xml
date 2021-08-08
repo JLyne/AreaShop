@@ -29,9 +29,9 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <build.number>#CUSTOM</build.number>
+    <maven.compiler.source>16</maven.compiler.source>
+    <maven.compiler.target>16</maven.compiler.target>
+    <build.number>#RTGAME</build.number>
   </properties>
 
   <modules>
@@ -41,6 +41,13 @@
     <module>areashop-worldedit-7_beta_4</module>
     <module>AreaShop</module>
   </modules>
+
+  <pluginRepositories>
+    <pluginRepository>
+        <id>maven-snapshots</id>
+        <url>https://repository.apache.org/content/repositories/snapshots/</url>
+    </pluginRepository>
+  </pluginRepositories>
 
   <build>
     <plugins>
