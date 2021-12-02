@@ -5,6 +5,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,6 +16,7 @@ public class RegionGroup {
 	private final String name;
 	private final Set<String> regions;
 	private Set<String> autoRegions;
+	private Set<String> allRegions;
 	private boolean autoDirty;
 	private final Set<String> worlds;
 
@@ -31,6 +33,7 @@ public class RegionGroup {
 
 		// Load regions and worlds
 		regions = new HashSet<>(getSettings().getStringList("regions"));
+		allRegions = new HashSet<>(regions);
 		worlds = new HashSet<>(getSettings().getStringList("worlds"));
 	}
 
@@ -46,6 +49,9 @@ public class RegionGroup {
 					autoRegions.add(region.getName());
 				}
 			}
+			allRegions.clear();
+			allRegions.addAll(regions);
+			allRegions.addAll(autoRegions);
 			autoDirty = false;
 		}
 		return autoRegions;
@@ -103,6 +109,7 @@ public class RegionGroup {
 	 */
 	public boolean addMember(GeneralRegion region) {
 		if(regions.add(region.getName())) {
+			allRegions.add(region.getName());
 			setSetting("regions", new ArrayList<>(regions));
 			saveRequired();
 			return true;
@@ -117,6 +124,7 @@ public class RegionGroup {
 	 */
 	public boolean removeMember(GeneralRegion region) {
 		if(regions.remove(region.getName())) {
+			allRegions.remove(region.getName());
 			setSetting("regions", new ArrayList<>(regions));
 			saveRequired();
 			return true;
@@ -129,9 +137,8 @@ public class RegionGroup {
 	 * @return A list with the names of all members of the group (immutable)
 	 */
 	public Set<String> getMembers() {
-		HashSet<String> result = new HashSet<>(regions);
-		result.addAll(getAutoRegions());
-		return result;
+		getAutoRegions();
+		return Collections.unmodifiableSet(allRegions);
 	}
 
 	/**
