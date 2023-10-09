@@ -22,16 +22,16 @@
 
         <!-- InteractiveMessenger library -->
         <dependency>
-            <groupId>me.wiefferink</groupId>
-            <artifactId>interactivemessenger</artifactId>
-            <version>1.1-SNAPSHOT</version>
+            <groupId>com.github.NLthijs48</groupId>
+            <artifactId>InteractiveMessenger</artifactId>
+            <version>1.1</version>
         </dependency>
 
         <!-- BukkitDo library -->
         <dependency>
-            <groupId>me.wiefferink</groupId>
-            <artifactId>bukkitdo</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <groupId>com.github.NLthijs48</groupId>
+            <artifactId>BukkitDo</artifactId>
+            <version>819d51ec2b</version>
         </dependency>
 
         <!-- WorldEdit/WorldGuard -->
@@ -214,7 +214,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.3.0-SNAPSHOT</version>
+                <version>3.5.1</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
