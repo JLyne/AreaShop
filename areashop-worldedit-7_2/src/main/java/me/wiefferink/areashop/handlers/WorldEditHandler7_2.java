@@ -64,7 +64,7 @@ public class WorldEditHandler7_2 extends WorldEditInterface {
 		for (ClipboardFormat formatOption : ClipboardFormats.getAll()) {
 			for (String extension : formatOption.getFileExtensions()) {
 				File fileOption = new File(rawFile.getAbsolutePath() + "." + extension);
-				if (fileOption.exists()) {
+				if (fileOption.exists() && formatOption.isFormat(fileOption)) {
 					file = fileOption;
 					format = formatOption;
 				}
