@@ -18,9 +18,9 @@
 
   <repositories>
     <repository>
-      <id>wiefferink-repo</id>
-      <url>https://maven.wiefferink.me</url>
-    </repository>
+		  <id>jitpack.io</id>
+		  <url>https://jitpack.io</url>
+	</repository>
      <repository>
           <id>paper-repo</id>
           <url>https://papermc.io/repo/repository/maven-public/</url>
@@ -37,8 +37,8 @@
   <modules>
     <module>areashop-interface</module>
     <module>areashop-bukkit-1_13</module>
-    <module>areashop-worldguard-7_beta_2</module>
-    <module>areashop-worldedit-7_beta_4</module>
+    <module>areashop-worldguard-7</module>
+    <module>areashop-worldedit-7_2</module>
     <module>AreaShop</module>
   </modules>
 

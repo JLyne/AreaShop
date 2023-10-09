@@ -169,8 +169,7 @@ public final class AreaShop extends JavaPlugin implements AreaShopInterface {
 			}
 
 			// Get correct WorldEditInterface (handles things that changed version to version)
-			weVersion = "7_beta_4";
-
+			weVersion = "7_2";
 			weVersion = "WorldEditHandler" + weVersion;
 		}
 
@@ -226,10 +225,10 @@ public final class AreaShop extends JavaPlugin implements AreaShopInterface {
 				}
 
 				// Determine correct implementation to use
-				wgVersion = "7_beta_2";
+				wgVersion = "7";
 			} catch(Exception e) { // If version detection fails, at least try to load the latest version
 				warn("Parsing the WorldGuard version failed, assuming version 7_beta_2:", rawWgVersion);
-				wgVersion = "7_beta_2";
+				wgVersion = "7";
 			}
 
 			wgVersion = "WorldGuardHandler" + wgVersion;

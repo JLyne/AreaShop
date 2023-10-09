@@ -40,14 +40,14 @@
             <artifactId>worldedit</artifactId>
             <scope>system</scope>
             <version>any</version>
-            <systemPath>${project.basedir}/../dependencies/worldedit-bukkit-7.0.0-beta-04.jar</systemPath>
+            <systemPath>${project.basedir}/../dependencies/worldedit-bukkit-7.2.5-dist.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.sk89q</groupId>
             <artifactId>worldguard</artifactId>
             <scope>system</scope>
             <version>any</version>
-            <systemPath>${project.basedir}/../dependencies/worldguard-legacy-7.0.0-beta-02.jar</systemPath>
+            <systemPath>${project.basedir}/../dependencies/worldguard-bukkit-7.0.5-dist.jar</systemPath>
         </dependency>
 
         <!-- Interfaces that specific WorldGuard and WorldEdit versions are built against -->
@@ -71,7 +71,7 @@
         <!-- WorldGuard implementations -->
         <dependency>
             <groupId>me.wiefferink</groupId>
-            <artifactId>areashop-worldguard-7_beta_2</artifactId>
+            <artifactId>areashop-worldguard-7</artifactId>
             <version>latest</version>
             <type>jar</type>
             <scope>compile</scope>
@@ -80,7 +80,13 @@
         <!-- WorldEdit implementations -->
         <dependency>
             <groupId>me.wiefferink</groupId>
-            <artifactId>areashop-worldedit-7_beta_4</artifactId>
+            <artifactId>areashop-worldedit-7_2</artifactId>
+            <version>latest</version>
+        </dependency>
+
+        <dependency>
+            <groupId>me.wiefferink</groupId>
+            <artifactId>areashop-worldedit-7_3</artifactId>
             <version>latest</version>
         </dependency>
 
