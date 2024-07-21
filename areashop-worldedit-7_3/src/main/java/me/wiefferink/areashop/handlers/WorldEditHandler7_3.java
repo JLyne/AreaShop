@@ -27,7 +27,7 @@ import me.wiefferink.areashop.interfaces.AreaShopInterface;
 import me.wiefferink.areashop.interfaces.GeneralRegionInterface;
 import me.wiefferink.areashop.interfaces.WorldEditInterface;
 import me.wiefferink.areashop.interfaces.WorldEditSelection;
-import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.bukkit.entity.Player;
 
 import java.io.BufferedInputStream;
@@ -37,9 +37,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class WorldEditHandler7_2 extends WorldEditInterface {
+public class WorldEditHandler7_3 extends WorldEditInterface {
 
-	public WorldEditHandler7_2(AreaShopInterface pluginInterface) {
+	public WorldEditHandler7_3(AreaShopInterface pluginInterface) {
 		super(pluginInterface);
 	}
 
@@ -84,10 +84,16 @@ public class WorldEditHandler7_2 extends WorldEditInterface {
 			pluginInterface.getLogger().info("Did not restore region " + regionInterface.getName() + ", world not found: " + regionInterface.getWorldName());
 			return false;
 		}
-		EditSession editSession = pluginInterface.getWorldEdit().getWorldEdit().getEditSessionFactory().getEditSession(world, pluginInterface.getConfig().getInt("maximumBlocks"));
+
+		EditSession editSession = pluginInterface.getWorldEdit().getWorldEdit()
+				.newEditSessionBuilder()
+				.world(world)
+				.maxBlocks(pluginInterface.getConfig().getInt("maximumBlocks"))
+				.build();
+
 		ProtectedRegion region = regionInterface.getRegion();
 		// Get the origin and size of the region
-		BlockVector3 origin = BlockVector3.at(region.getMinimumPoint().getBlockX(), region.getMinimumPoint().getBlockY(), region.getMinimumPoint().getBlockZ());
+		BlockVector3 origin = BlockVector3.at(region.getMinimumPoint().x(), region.getMinimumPoint().y(), region.getMinimumPoint().z());
 
 		// Read the schematic and paste it into the world
 		try(Closer closer = Closer.create()) {
@@ -98,11 +104,11 @@ public class WorldEditHandler7_2 extends WorldEditInterface {
 			//WorldData worldData = world.getWorldData();
 			LocalSession session = new LocalSession(pluginInterface.getWorldEdit().getLocalConfiguration());
 			Clipboard clipboard = reader.read();
-			if(clipboard.getDimensions().getY() != regionInterface.getHeight()
-					|| clipboard.getDimensions().getX() != regionInterface.getWidth()
-					|| clipboard.getDimensions().getZ() != regionInterface.getDepth()) {
+			if(clipboard.getDimensions().y() != regionInterface.getHeight()
+					|| clipboard.getDimensions().x() != regionInterface.getWidth()
+					|| clipboard.getDimensions().z() != regionInterface.getDepth()) {
 				pluginInterface.getLogger().warning("Size of the region " + regionInterface.getName() + " is not the same as the schematic to restore!");
-				pluginInterface.debugI("schematic|region, x:" + clipboard.getDimensions().getX() + "|" + regionInterface.getWidth() + ", y:" + clipboard.getDimensions().getY() + "|" + regionInterface.getHeight() + ", z:" + clipboard.getDimensions().getZ() + "|" + regionInterface.getDepth());
+				pluginInterface.debugI("schematic|region, x:" + clipboard.getDimensions().x() + "|" + regionInterface.getWidth() + ", y:" + clipboard.getDimensions().y() + "|" + regionInterface.getHeight() + ", z:" + clipboard.getDimensions().z() + "|" + regionInterface.getDepth());
 			}
 			clipboard.setOrigin(clipboard.getMinimumPoint());
 			ClipboardHolder clipboardHolder = new ClipboardHolder(clipboard);
@@ -142,7 +148,7 @@ public class WorldEditHandler7_2 extends WorldEditInterface {
 			pluginInterface.debugI(ExceptionUtils.getStackTrace(e));
 			return false;
 		}
-		editSession.flushSession();
+		editSession.close();
 		return true;
 	}
 
@@ -170,7 +176,12 @@ public class WorldEditHandler7_2 extends WorldEditInterface {
 			pluginInterface.getLogger().warning("Did not save region " + regionInterface.getName() + ", world not found: " + regionInterface.getWorldName());
 			return false;
 		}
-		EditSession editSession = pluginInterface.getWorldEdit().getWorldEdit().getEditSessionFactory().getEditSession(world, pluginInterface.getConfig().getInt("maximumBlocks"));
+
+		EditSession editSession = pluginInterface.getWorldEdit().getWorldEdit()
+				.newEditSessionBuilder()
+				.world(world)
+				.maxBlocks(pluginInterface.getConfig().getInt("maximumBlocks"))
+				.build();
 
 		// Create a clipboard
 		CuboidRegion selection = new CuboidRegion(world, regionInterface.getRegion().getMinimumPoint(), regionInterface.getRegion().getMaximumPoint());

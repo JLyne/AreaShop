@@ -2,7 +2,7 @@ package me.wiefferink.areashop.commands;
 
 import me.wiefferink.areashop.AreaShop;
 import me.wiefferink.interactivemessenger.processing.Message;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 

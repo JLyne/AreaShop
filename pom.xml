@@ -25,12 +25,16 @@
           <id>paper-repo</id>
           <url>https://papermc.io/repo/repository/maven-public/</url>
       </repository>
+     <repository>
+          <id>sk89-repo</id>
+          <url>https://maven.enginehub.org/repo/</url>
+      </repository>
   </repositories>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>16</maven.compiler.source>
-    <maven.compiler.target>16</maven.compiler.target>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
     <build.number>#RTGAME</build.number>
   </properties>
 
@@ -38,7 +42,7 @@
     <module>areashop-interface</module>
     <module>areashop-bukkit-1_13</module>
     <module>areashop-worldguard-7</module>
-    <module>areashop-worldedit-7_2</module>
+    <module>areashop-worldedit-7_3</module>
     <module>AreaShop</module>
   </modules>
 

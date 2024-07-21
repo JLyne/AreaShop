@@ -16,7 +16,7 @@
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>1.17.1-R0.1-SNAPSHOT</version>
+            <version>1.20.6-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
@@ -36,18 +36,16 @@
 
         <!-- WorldEdit/WorldGuard -->
         <dependency>
-            <groupId>com.sk89q</groupId>
-            <artifactId>worldedit</artifactId>
-            <scope>system</scope>
-            <version>any</version>
-            <systemPath>${project.basedir}/../dependencies/worldedit-bukkit-7.2.5-dist.jar</systemPath>
+            <groupId>com.sk89q.worldedit</groupId>
+            <artifactId>worldedit-bukkit</artifactId>
+            <scope>provided</scope>
+            <version>7.3.4</version>
         </dependency>
         <dependency>
-            <groupId>com.sk89q</groupId>
-            <artifactId>worldguard</artifactId>
-            <scope>system</scope>
-            <version>any</version>
-            <systemPath>${project.basedir}/../dependencies/worldguard-bukkit-7.0.5-dist.jar</systemPath>
+            <groupId>com.sk89q.worldguard</groupId>
+            <artifactId>worldguard-bukkit</artifactId>
+            <scope>provided</scope>
+            <version>7.0.10</version>
         </dependency>
 
         <!-- Interfaces that specific WorldGuard and WorldEdit versions are built against -->
@@ -80,7 +78,7 @@
         <!-- WorldEdit implementations -->
         <dependency>
             <groupId>me.wiefferink</groupId>
-            <artifactId>areashop-worldedit-7_2</artifactId>
+            <artifactId>areashop-worldedit-7_3</artifactId>
             <version>latest</version>
         </dependency>
 

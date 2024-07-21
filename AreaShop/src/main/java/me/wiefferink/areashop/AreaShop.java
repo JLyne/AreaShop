@@ -19,8 +19,8 @@ import me.wiefferink.bukkitdo.Do;
 import me.wiefferink.interactivemessenger.processing.Message;
 import me.wiefferink.interactivemessenger.source.LanguageManager;
 import net.milkbowl.vault.economy.Economy;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
@@ -169,7 +169,7 @@ public final class AreaShop extends JavaPlugin implements AreaShopInterface {
 			}
 
 			// Get correct WorldEditInterface (handles things that changed version to version)
-			weVersion = "7_2";
+			weVersion = "7_3";
 			weVersion = "WorldEditHandler" + weVersion;
 		}
 
