@@ -1,5 +1,7 @@
 package me.wiefferink.areashop.regions;
 
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldguard.protection.regions.ProtectedPolygonalRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import me.wiefferink.areashop.AreaShop;
@@ -25,6 +27,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 
 import java.awt.geom.Area;
@@ -790,6 +793,24 @@ public abstract class GeneralRegion implements GeneralRegionInterface, Comparabl
 			AreaShop.debug("Region '" + getName() + "' does not exist in WorldGuard, restore failed");
 			return false;
 		}
+
+		ProtectedRegion region = getRegion();
+		BlockVector3 max = region.getMaximumPoint();
+		BlockVector3 min = region.getMinimumPoint();
+		BoundingBox bounds = new BoundingBox(min.x(), min.y(), min.z(), max.x() + 1, max.y() + 1, max.z() + 1);
+
+		//Remove entities already in the region
+		getWorld().getNearbyEntities(bounds).forEach(e -> {
+			if(e instanceof Player) {
+				return;
+			}
+
+			Location location = e.getLocation();
+			if(region.contains(location.getBlockX(), location.getBlockY(), location.getBlockZ())) {
+				e.remove();
+			}
+		});
+
 		// The path to save the schematic
 		File restoreFile = new File(plugin.getFileManager().getSchematicFolder() + File.separator + fileName);
 		boolean result = plugin.getWorldEditHandler().restoreRegionBlocks(restoreFile, this);
