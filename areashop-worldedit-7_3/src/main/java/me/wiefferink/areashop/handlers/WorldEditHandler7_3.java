@@ -154,7 +154,7 @@ public class WorldEditHandler7_3 extends WorldEditInterface {
 
 	@Override
 	public boolean saveRegionBlocks(File file, GeneralRegionInterface regionInterface) {
-		ClipboardFormat format = ClipboardFormats.findByAlias("sponge");
+		ClipboardFormat format = ClipboardFormats.findByAlias("sponge.3");
 		if(format == null) {
 			// Sponge format does not exist, try to select another one
 			for(ClipboardFormat otherFormat : ClipboardFormats.getAll()) {
