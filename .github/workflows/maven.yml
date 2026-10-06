@@ -1,0 +1,36 @@
+name: Build AreaShop (Java 25)
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch: # Ta linia pozwala na ręczne uruchomienie przyciskiem w zakładce Actions
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Pobranie kodu źródłowego
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # 2. Konfiguracja Javy 25 (wymaganej przez Twój pom.xml)
+    - name: Set up JDK 25
+      uses: actions/setup-java@v4
+      with:
+        java-version: '25'
+        distribution: 'temurin'
+        cache: 'maven'
+
+    # 3. Kompilacja projektu i budowanie zacieniowanego pliku .jar (Shade)
+    - name: Build with Maven
+      run: mvn clean package --file pom.xml
+
+    # 4. Wyciągnięcie gotowego pliku .jar jako artefakt do pobrania
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: AreaShop-Compiled
+        path: target/*.jar
